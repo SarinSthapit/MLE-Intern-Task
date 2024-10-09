@@ -7,8 +7,7 @@
 ##### __Summarization of Discussions__
 ##### __Sentiment Analysis__
 ##### __Frontend Development using Flask__
-
-
+##
 #### __Installation Instructions__
 ###### 1. First of all, clone the repository: _git clone https://github.com/SarinSthapit/MLE-Intern-Task.git_ 
 ###### 2. Enter into the local repository: _cd MLE-Intern-Task_
