@@ -2,10 +2,15 @@
 #### __ML Experts Internship Evaluation Task: Sarin Sthapit__
 ##
 ### __Approach__
-##### 1. **Fetching News Articles and Top 5 Hot Topics**: Two APIs, News API and GNews API were used to extract news articles based on the names of cities that were entered by the user. Then, similar topics are filtered out, and unique topics are retained. Count occurences of keywords are used to find the most common phrases for specified number of topics.
+##### 1. __Fetching News Articles and Top 5 Hot Topics__
+##### Two APIs, News API and GNews API were used to extract news articles based on the names of cities that were entered by the user. Then, similar topics are filtered out, and unique topics are retained. Count occurences of keywords are used to find the most common phrases for specified number of topics.
+###
 ##### 2. __Extracting Discussion from Reddit__ 
+###
 ##### 3. __Summarization of Discussions__
+###
 ##### 4. __Sentiment Analysis__
+###
 ##### 5. __Frontend Development using Flask__
 ##
 ### __Installation Instructions__
