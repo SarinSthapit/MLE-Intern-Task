@@ -31,8 +31,6 @@ def index():
             hot_topics = get_news_topics(city, n=2, num_topics=5) 
         elif selected_api == 'gnewsapi':
             hot_topics = get_gnews_topics(city, n=2, num_topics=5) 
-        elif selected_api == 'currentnewsapi':
-            hot_topics = get_currentnews_topics(city, n=2, num_topics=5)
 
         gather_all_discussions(hot_topics, limit=5)
 
