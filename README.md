@@ -1,12 +1,13 @@
 # __Political Sentiment Dashboard__
 ### __ML Experts Internship Evaluation Task: Sarin Sthapit__
-
+<br>
 #### __Approach__
 ##### __Fetching News Articles and Top 5 Hot Topics__
 ##### __Extracting Discussion from Reddit__ 
 ##### __Summarization of Discussions__
 ##### __Sentiment Analysis__
 ##### __Frontend Development using Flask__
+
 
 #### __Installation Instructions__
 ###### 1. First of all, clone the repository: _git clone https://github.com/SarinSthapit/MLE-Intern-Task.git_ 
