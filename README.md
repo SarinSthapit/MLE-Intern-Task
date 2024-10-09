@@ -6,4 +6,4 @@
 ##### __Steps__
 ###### 1. First of all, clone the repository: _git clone https://github.com/SarinSthapit/MLE-Intern-Task.git_ 
 ###### 2. Enter into the local repository: _cd MLE-Intern-Task_
-###### 3. Create a Conda environment: _conda create --name new_env python=3.8_
+###### 3. Create a Conda environment: _conda create --name new_env python=3.9.18_
