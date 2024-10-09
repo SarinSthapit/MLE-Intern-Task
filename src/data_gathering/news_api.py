@@ -11,10 +11,6 @@ load_dotenv()
 API_KEY = os.getenv('API_KEY')
 
 def extract_keywords(content, n=1):
-    """
-    Extract n-grams from the content. n can be 1 (unigrams), 2 (bigrams), 3 (trigrams), etc.
-    Stopwords are filtered out, and only meaningful words are kept.
-    """
     words = re.findall(r'\b\w+\b', content.lower())
     stopwords = set([
         "the", "and", "to", "of", "in", "a", "on", "for", "with", 
@@ -25,16 +21,12 @@ def extract_keywords(content, n=1):
     ])
     keywords = [word for word in words if word not in stopwords and len(word) > 2]
     
-    # Generate n-grams
     ngrams = zip(*[islice(keywords, i, None) for i in range(n)])
     ngrams_list = [' '.join(ngram) for ngram in ngrams]
     
     return ngrams_list
 
 def fetch_news(city):
-    """
-    Fetch news articles for a given city using the NewsAPI.
-    """
     url = f"https://newsapi.org/v2/everything?q={city}&sortBy=publishedAt&apiKey={API_KEY}"
     response = requests.get(url)
     if response.status_code == 200:
@@ -44,9 +36,6 @@ def fetch_news(city):
         return []
 
 def filter_similar_topics(hot_topics, similarity_threshold=0.7):
-    """
-    Remove similar topics based on a similarity threshold using sequence matching.
-    """
     unique_topics = []
     
     for topic in hot_topics:
@@ -56,33 +45,23 @@ def filter_similar_topics(hot_topics, similarity_threshold=0.7):
     return unique_topics
 
 def extract_hot_topics(articles, n=2, num_topics=5, min_count=2):
-    """
-    Extract relevant n-grams (hot topics) from the news articles.
-    Ensure no two words in one topic are the same and no word is repeated across topics.
-    
-    n: The number of words to include in the n-grams (default is 2 for bigrams).
-    num_topics: The number of hot topics to return.
-    min_count: Minimum count of occurrences for a topic to be considered relevant.
-    """
     keyword_counter = Counter()
-    used_words = set()  # Track words used in all topics
+    used_words = set() 
 
     for article in articles:
         title = article.get('title') or ''
         description = article.get('description') or ''
         content = title + " " + description
-        keywords = extract_keywords(content, n=n)  # Extract n-grams
+        keywords = extract_keywords(content, n=n)  
         keyword_counter.update(keywords)
 
     hot_topics = []
     
-    # Iterate over the most common n-grams
     for phrase, count in keyword_counter.most_common():
         if count < min_count:
             continue
         
         words = phrase.split()
-        # Check for duplicate words in the same topic or previously used words
         if len(set(words)) == len(words) and not used_words.intersection(words):
             hot_topics.append(phrase)
             used_words.update(words)
@@ -94,11 +73,6 @@ def extract_hot_topics(articles, n=2, num_topics=5, min_count=2):
 
 
 def get_news_topics(city, n=2, num_topics=5):
-    """
-    Get hot topics (n-grams) from news articles for a specific city.
-    n: Number of words in the n-grams (default is 2).
-    num_topics: Number of hot topics to return (default is 5).
-    """
     articles = fetch_news(city)
     if articles:
         hot_topics = extract_hot_topics(articles, n=n, num_topics=num_topics)
