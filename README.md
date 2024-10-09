@@ -1,5 +1,6 @@
 # __Political Sentiment Dashboard__
-### __ML Experts Internship Evaluation Task: Sarin Sthapit__<br/>
+### __ML Experts Internship Evaluation Task: Sarin Sthapit__
+##
 #### __Approach__
 ##### __Fetching News Articles and Top 5 Hot Topics__
 ##### __Extracting Discussion from Reddit__ 
