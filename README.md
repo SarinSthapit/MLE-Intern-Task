@@ -2,8 +2,7 @@
 #### __ML Experts Internship Evaluation Task: Sarin Sthapit__
 ##
 ### __Approach__
-###### 1. __Fetching News Articles and Top 5 Hot Topics__
-Two APIs, News API and GNews API were used to extract news articles based on the names of cities that were entered by the user.
+###### 1. __Fetching News Articles and Top 5 Hot Topics__: Two APIs, News API and GNews API were used to extract news articles based on the names of cities that were entered by the user.
 ###### 2. __Extracting Discussion from Reddit__ 
 ###### 3. __Summarization of Discussions__
 ###### 4. __Sentiment Analysis__
