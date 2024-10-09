@@ -8,7 +8,7 @@ from itertools import islice
 
 load_dotenv()
 
-API_KEY = os.getenv('API_KEY')
+GNEWS_API_KEY = os.getenv('CURRENT_NEWS_API_KEY')
 
 def extract_keywords(content, n=1):
     """
@@ -33,9 +33,9 @@ def extract_keywords(content, n=1):
 
 def fetch_news(city):
     """
-    Fetch news articles for a given city using the NewsAPI.
+    Fetch news articles for a given city using the GNews API.
     """
-    url = f"https://newsapi.org/v2/everything?q={city}&sortBy=publishedAt&apiKey={API_KEY}"
+    url = f"https://gnews.io/api/v4/search?q={city}&lang=en&token={GNEWS_API_KEY}"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json().get('articles', [])
@@ -92,8 +92,7 @@ def extract_hot_topics(articles, n=2, num_topics=5, min_count=2):
     
     return hot_topics
 
-
-def get_news_topics(city, n=2, num_topics=5):
+def get_currentnews_topics(city, n=2, num_topics=5):
     """
     Get hot topics (n-grams) from news articles for a specific city.
     n: Number of words in the n-grams (default is 2).

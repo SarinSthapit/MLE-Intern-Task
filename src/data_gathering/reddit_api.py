@@ -1,12 +1,10 @@
 import json
 import praw
 import os
-import sys 
+import sys
 from dotenv import load_dotenv
 
 from .news_api import get_news_topics
-
-
 
 load_dotenv()
 
@@ -28,11 +26,15 @@ def gather_discussions_for_topic(topic, limit=5):
         }
 
         submission.comments.replace_more(limit=0)
-        for comment in submission.comments.list():
-            discussion["comments"].append({
-                "body": comment.body,
-                "score": comment.score
-            })
+        # Limit to 50 comments per discussion with at least 10 words
+        for idx, comment in enumerate(submission.comments.list()):
+            if idx >= 25:
+                break
+            if len(comment.body.split()) >= 15:  # Check if comment has at least 10 words
+                discussion["comments"].append({
+                    "body": comment.body,
+                    "score": comment.score
+                })
 
         discussions.append(discussion)
 
@@ -50,8 +52,3 @@ def gather_all_discussions(topics, limit=5):
     with open(json_path, 'w') as f:
         json.dump(all_discussions, f, indent=4)
     print(f"Discussions gathered for {len(topics)} topics.")
-
-
-city = "Kathmandu" 
-hot_topics = get_news_topics(city)
-gather_all_discussions(hot_topics, limit=5)

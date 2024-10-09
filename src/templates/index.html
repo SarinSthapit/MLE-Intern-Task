@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Sentiment Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Political Sentiment and Discussion Dashboard</h1>
+        
+        <form method="POST">
+            <label for="city">Enter City Name:</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="api">Choose News API:</label>
+            <select id="api" name="api" required>
+                <option value="newsapi">NewsAPI</option>
+                <option value="gnewsapi">GNews API</option>
+            </select>
+
+            <button type="submit">Get Hot Topics & Analysis</button>
+        </form>
+
+        {% if hot_topics %}
+        <div class="topics">
+            <h2>Hot Topics in {{ request.form.city }}</h2>
+            <ul>
+                {% for topic in hot_topics %}
+                <li onclick="toggleSummary('{{ topic|title }}')">{{ topic|title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if analysis_results %}
+        <div class="analysis">
+            <h2>Analysis Results</h2>
+            
+            <div class="summary">
+                <h3>Discussion Summaries</h3>
+                {% for topic, summary in analysis_results['summaries'].items() %}
+                <div class="summary-item" id="{{ topic|title }}-summary" style="display:none;">
+                    <h4>{{ topic }}</h4>
+                    <p>{{ summary }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+            <div class="sentiment-analysis">
+                <h3>Sentiment Analysis</h3>
+                <img src="{{ url_for('static', filename='sentiment_analysis.png') }}" alt="Sentiment Analysis Plot">
+            </div>
+
+            <div class="overall-sentiment">
+                <h3>Overall Sentiment</h3>
+                <p>Positive: {{ analysis_results['overall']['positive'] }}</p>
+                <p>Negative: {{ analysis_results['overall']['negative'] }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleSummary(topic) {
+            const summaryDiv = document.getElementById(topic + '-summary');
+            if (summaryDiv.style.display === 'none' || summaryDiv.style.display === '') {
+                summaryDiv.style.display = 'block';
+            } else {
+                summaryDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
