@@ -4,6 +4,7 @@
 ### __Approach__
 ##### 1. __Fetching News Articles and Top 5 Hot Topics__
 ###### Two APIs, News API and GNews API were used to extract news articles based on the names of cities that were entered by the user. A URL is constructed to query News API for articles related to the specified city. Then, similar topics are filtered out, and unique topics are retained using _SequenceMatcher_. Count occurences of keywords are used to find the most common phrases for specified number of topics.
+##### N-Grams mechanism is used to extract the hot topics while preserbing the context of words by considering them in combination rather than treating them as isolated units. This also helps to provide a richer representation of the text data. 
 ##
 ##### 2. __Extracting Discussion from Reddit__ 
 ##
