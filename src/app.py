@@ -6,6 +6,11 @@ from src.data_gathering.gnews_api import get_gnews_topics
 from src.data_gathering.news_api import get_news_topics
 from src.data_gathering.reddit_api import gather_all_discussions
 from src.data_gathering.analysis import analyze_gathered_info, plot_sentiments
+import warnings 
+
+warnings.filterwarnings("ignore", category=FutureWarning, message="resume_download is deprecated")
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", message="Special tokens have been added in the vocabulary.*")
 
 app = Flask(__name__)
 
@@ -16,10 +21,10 @@ def index():
     summaries = None
     sentiments = None
     overall = None
+    actions = None
 
     if request.method == 'POST':
         city = request.form['city']
-        
         selected_api = request.form['api']
 
         if selected_api == 'newsapi':
@@ -31,21 +36,25 @@ def index():
 
         gather_all_discussions(hot_topics, limit=5)
 
-        summaries, sentiments= analyze_gathered_info()  
-        actions = analyze_gathered_action_info()
+        summaries, sentiments = analyze_gathered_info() 
+        actions, actionsentiments = analyze_gathered_action_info()
+        
+        print("Actions Needed:")
+        for topic, action in actions.items():
+            print(f"{topic}: {action}")
+        
         
         overall = {
             'positive': sum(1 for sentiment_list in sentiments.values() for sentiment in sentiment_list if sentiment['label'] == 'POSITIVE'),
             'negative': sum(1 for sentiment_list in sentiments.values() for sentiment in sentiment_list if sentiment['label'] == 'NEGATIVE')
         }
 
-
         analysis_results = {
             'summaries': summaries,
             'sentiments': sentiments,
-            'overall': overall
+            'overall': overall,
+            'actions': actions
         }
-
 
         static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
         plot_path = os.path.join(static_folder, 'sentiment_analysis.png')

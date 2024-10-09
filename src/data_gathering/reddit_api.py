@@ -27,7 +27,7 @@ def gather_discussions_for_topic(topic, limit=5):
 
         submission.comments.replace_more(limit=0)
         for idx, comment in enumerate(submission.comments.list()):
-            if idx >= 25:
+            if idx >= 50:
                 break
             if len(comment.body.split()) >= 15:
                 discussion["comments"].append({

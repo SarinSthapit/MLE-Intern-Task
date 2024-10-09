@@ -19,9 +19,6 @@ t5_tokenizer = T5Tokenizer.from_pretrained('t5-small', legacy=False)
 sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
 def summarize_text_t5(text):
-    """
-    Summarize the given text using the T5 model and refine the summary for grammatical accuracy.
-    """
     input_text = "summarize: " + text
     inputs = t5_tokenizer.encode(input_text, return_tensors="pt", max_length=512, truncation=True)
 

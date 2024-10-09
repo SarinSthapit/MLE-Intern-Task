@@ -18,6 +18,7 @@
             <select id="api" name="api" required>
                 <option value="newsapi">NewsAPI</option>
                 <option value="gnewsapi">GNews API</option>
+                <option value="currentnewsapi">CurrentNews API</option>
             </select>
 
             <button type="submit">Get Hot Topics & Analysis</button>
@@ -26,39 +27,46 @@
         {% if hot_topics %}
         <div class="topics">
             <h2>Hot Topics in {{ request.form.city }}</h2>
-            <ul>
+            <ul id="hot-topics-list">
                 {% for topic in hot_topics %}
-                <li onclick="toggleSummary('{{ topic|title }}')">{{ topic|title }}</li>
+                <li>
+                    <span onclick="toggleSummary('{{ topic|title }}')">{{ topic|title }}</span>
+                    <div id="{{ topic|title }}-summary" class="summary-item" style="display: none;">
+                        <p>{{ analysis_results['summaries'][topic] }}</p>
+                    </div>
+                </li>
                 {% endfor %}
             </ul>
         </div>
         {% endif %}
-
+        <br><br>
         {% if analysis_results %}
         <div class="analysis">
-            <h2>Analysis Results</h2>
-            
-            <div class="summary">
-                <h3>Discussion Summaries</h3>
-                {% for topic, summary in analysis_results['summaries'].items() %}
-                <div class="summary-item" id="{{ topic|title }}-summary" style="display:none;">
-                    <h4>{{ topic }}</h4>
-                    <p>{{ summary }}</p>
-                </div>
+            <h2>Actionable Insights</h2>
+            <ul id="actionable-insights-list">
+                {% for topic in hot_topics %}
+                <li>
+                    <span onclick="toggleAction('{{ topic|title }}')">{{ topic|title }}</span>
+                    <div id="{{ topic|title }}-action" class="action-item" style="display: none;">
+                        <p>{{ analysis_results['actions'][topic] }}</p>
+                    </div>
+                </li>
                 {% endfor %}
-            </div>
-            <br>
-            <br>
-            <div class="sentiment-analysis">
-                <h3>Sentiment Analysis</h3>
-                <img src="{{ url_for('static', filename='sentiment_analysis.png') }}" alt="Sentiment Analysis Plot">
-            </div>
+            </ul>
+        </div>
+        {% endif %}
+        <br><br>
+        {% if analysis_results %}
 
-            <div class="overall-sentiment">
-                <h3>Overall Sentiment</h3>
-                <p>Positive: {{ analysis_results['overall']['positive'] }}</p>
-                <p>Negative: {{ analysis_results['overall']['negative'] }}</p>
-            </div>
+        <div class="sentiment-analysis">
+            <h3>Sentiment Analysis</h3>
+            <img src="{{ url_for('static', filename='sentiment_analysis.png') }}" alt="Sentiment Analysis Plot">
+        </div>
+
+        <div class="overall-sentiment">
+            <h3>Overall Sentiment</h3>
+            <p>Positive: {{ analysis_results['overall']['positive'] }}</p>
+            <p>Negative: {{ analysis_results['overall']['negative'] }}</p>
         </div>
         {% endif %}
     </div>
@@ -70,6 +78,15 @@
                 summaryDiv.style.display = 'block';
             } else {
                 summaryDiv.style.display = 'none';
+            }
+        }
+
+        function toggleAction(topic) {
+            const actionDiv = document.getElementById(topic + '-action');
+            if (actionDiv.style.display === 'none' || actionDiv.style.display === '') {
+                actionDiv.style.display = 'block';
+            } else {
+                actionDiv.style.display = 'none';
             }
         }
     </script>

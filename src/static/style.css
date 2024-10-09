@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #e3f2fd, #f1f8e9);
@@ -17,6 +18,7 @@ body {
 h1 {
     text-align: center;
     color: #333;
+    margin-bottom: 30px;
 }
 
 form {
@@ -27,6 +29,7 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    color: #333;
 }
 
 input[type="text"], select {
@@ -63,20 +66,16 @@ button:hover {
     margin-top: 20px;
 }
 
-h2, h3 {
+h2 {
+    color: #444;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+h3 {
     color: #444;
     margin-bottom: 10px;
-}
-
-h4 {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-.overall-sentiment p {
-    font-size: 1.1em;
-    margin-top: 10px;
+    font-size: 1.4em;
 }
 
 ul {
@@ -86,34 +85,61 @@ ul {
 
 li {
     background: #f9f9f9;
-    padding: 10px;
+    padding: 15px;
     border-radius: 4px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     cursor: pointer;
     transition: background 0.3s;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: relative;
 }
 
 li:hover {
     background: #e8f5e9;
 }
 
-.summary-item {
-    margin-bottom: 15px;
+.summary-item, .action-item {
+    margin-top: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background: #f2f2f2;
-    display: none; /* Initially hidden */
+    display: none; 
+    font-weight: normal;
+    font-size: 1em;
 }
 
-.summary-item h4 {
+.summary-item p, .action-item p {
     margin: 0;
+    color: #555;
+}
+.overall-sentiment p {
+    font-size: 1.1em;
+    margin-top: 10px;
 }
 
-.actionable-needs {
-    margin-top: 20px;
+li > div {
+    margin-left: 20px;
 }
 
-.actionable-needs h3 {
-    color: #333;
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2, h3 {
+        font-size: 1.2em;
+    }
+
+    li {
+        font-size: 1em;
+    }
 }
+

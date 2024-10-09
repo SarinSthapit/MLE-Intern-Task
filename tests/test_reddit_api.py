@@ -8,10 +8,6 @@ from unittest.mock import patch
 
 from src.data_gathering.reddit_api import gather_all_discussions, gather_discussions_for_topic
 
-""" sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-from data_gathering.reddit_api import gather_all_discussions, gather_discussions_for_topic """
-
-
 class TestRedditApiFunctions(unittest.TestCase):
 
     @patch('praw.Reddit')
