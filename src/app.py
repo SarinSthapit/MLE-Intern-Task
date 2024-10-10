@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import os
 from src.data_gathering.actions_needed import analyze_gathered_action_info
-from src.data_gathering.currentnews_api import get_currentnews_topics
 from src.data_gathering.gnews_api import get_gnews_topics
 from src.data_gathering.news_api import get_news_topics
 from src.data_gathering.reddit_api import gather_all_discussions
