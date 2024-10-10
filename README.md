@@ -1,5 +1,5 @@
 <style>
-  p{
+  p {
     line-height: 1.8;
   }
 </style>
