@@ -15,7 +15,9 @@
 ###### For Sentiment Analysis, a _DistilBERT_-based model is used for sentiment classification. Once the discussions are summarized, the same text from JSON file is broken into chunks again for sentiment processing. Each chunk is analyzed for positive or negative sentiments, and the results are aggreagated for each discussion topic. The sentiments are then categorized into positives and negatives. A final tally of the sentiment counts across all discussion is made, giving a comprehensive view of how people feel about each topic. These results are visualized in a bar chart, comparing the number of positive and negative sentiments for each topic, providing deeper insights.
 ##
 ##### 5. __Frontend Development using Flask__
-######
+![Image1](./images/page1.jpg)
+![Image2](./images/page2.jpg)
+![Image3](./images/page3.jpg)
 #
 #
 ### __Installation Instructions__
