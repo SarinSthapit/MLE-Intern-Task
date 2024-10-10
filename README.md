@@ -1,3 +1,8 @@
+<style>
+  p{
+    line-height: 1.8;
+  }
+</style>
 # <p align="center">__Political Sentiment Dashboard__</p>
 #### <p align="left">__ML Experts Internship Evaluation Task</p> <p align="right">- Submitted by Sarin Sthapit__</p>
 ##
