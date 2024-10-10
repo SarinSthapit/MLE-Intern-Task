@@ -1,5 +1,6 @@
 # <p align="center">__Political Sentiment Dashboard__</p>
-#### <p align="left">__ML Experts Internship Evaluation Task</p> <p align="right">- Submitted by Sarin Sthapit__</p>
+##### <p align="left">__ML Experts Internship Evaluation Task</p> 
+#####<p align="left">- Submitted by Sarin Sthapit__</p>
 ##
 ### __Approach__
 #### 1. __Fetching News Articles and Top 5 Hot Topics__
