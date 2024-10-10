@@ -1,7 +1,7 @@
-from .news_api import get_news, extract_hot_topics
+from .news_api import extract_hot_topics, get_news_topics
 
 def display_hot_topics(city):
-    news_data = get_news(city)
+    news_data = get_news_topics(city)
     if news_data:
         top_topics = extract_hot_topics(news_data)
         if top_topics:

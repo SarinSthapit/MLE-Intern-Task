@@ -26,6 +26,7 @@ def extract_keywords(content, n=1):
     
     return ngrams_list
 
+
 def fetch_news(city):
     url = f"https://gnews.io/api/v4/search?q={city}&lang=en&token={GNEWS_API_KEY}"
     response = requests.get(url)
@@ -35,6 +36,7 @@ def fetch_news(city):
         print(f"Error fetching news for city {city}: {response.status_code}")
         return []
 
+
 def filter_similar_topics(hot_topics, similarity_threshold=0.7):
     unique_topics = []
     
@@ -43,6 +45,7 @@ def filter_similar_topics(hot_topics, similarity_threshold=0.7):
             unique_topics.append(topic)
     
     return unique_topics
+
 
 def extract_hot_topics(articles, n=2, num_topics=5, min_count=2):
     keyword_counter = Counter()
@@ -70,6 +73,7 @@ def extract_hot_topics(articles, n=2, num_topics=5, min_count=2):
             break
     
     return hot_topics
+
 
 def get_gnews_topics(city, n=2, num_topics=5):
     articles = fetch_news(city)

@@ -66,5 +66,6 @@ class TestRedditApiFunctions(unittest.TestCase):
             mock_open.assert_called_once_with(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../data/discussions.json'), 'w')
             mock_json_dump.assert_called_once()  
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -19,6 +19,7 @@ t5_tokenizer = T5Tokenizer.from_pretrained('t5-small', legacy=False)
 
 sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
+
 def summarize_text_t5(text):
     input_text = "summarize: " + text
     inputs = t5_tokenizer.encode(input_text, return_tensors="pt", max_length=512, truncation=True)
@@ -103,8 +104,6 @@ def analyze_sentiment(discussions):
     return sentiments
 
 
-
-
 def overall_sentiment(sentiments):
     overall = {'positive': 0, 'negative': 0}
     
@@ -116,6 +115,7 @@ def overall_sentiment(sentiments):
                 overall['negative'] += 1
                 
     return overall
+
 
 def plot_sentiments(sentiments, save_path):
     topics = []
@@ -141,6 +141,7 @@ def plot_sentiments(sentiments, save_path):
 
     plt.savefig(save_path)
     plt.close()
+
 
 def analyze_gathered_action_info():
     json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../data/discussions.json')

@@ -59,5 +59,6 @@ def index():
 
     return render_template("index.html", analysis_results=analysis_results, hot_topics=hot_topics)
 
+
 if __name__ == "__main__":
     app.run(debug=True)

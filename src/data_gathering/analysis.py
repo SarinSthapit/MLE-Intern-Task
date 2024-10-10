@@ -58,6 +58,7 @@ def refine_summary(summary):
     refined_summary = t5_tokenizer.decode(refined_ids[0], skip_special_tokens=True)
     return refined_summary
 
+
 def load_discussions(json_path):
     
     with open(json_path, 'r') as f:
@@ -75,6 +76,7 @@ def summarize_discussions(discussions):
         summaries[topic] = combined_summary.strip()
 
     return summaries
+
 
 def analyze_sentiment(discussions):
     sentiments = {}
@@ -106,6 +108,7 @@ def overall_sentiment(sentiments):
                 
     return overall
 
+
 def plot_sentiments(sentiments, save_path):
     topics = []
     positive_counts = []
@@ -130,6 +133,7 @@ def plot_sentiments(sentiments, save_path):
 
     plt.savefig(save_path)
     plt.close()
+
 
 def analyze_gathered_info():
     json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../data/discussions.json')

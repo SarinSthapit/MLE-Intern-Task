@@ -5,7 +5,7 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from data_gathering.news_api import extract_keywords, fetch_news
+from data_gathering.gnews_api import extract_keywords, fetch_news
 
 class TestNewsApiFunctions(unittest.TestCase):
 
