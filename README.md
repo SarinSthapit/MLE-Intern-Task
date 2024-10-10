@@ -1,5 +1,5 @@
 # <p align="center">__Political Sentiment Dashboard__</p>
-##### <p align="left">__ML Experts Internship Evaluation Task</p> 
+##### <p align="left">__ML Experts Internship Evaluation Task__</p> 
 ##### <p align="left">- Submitted by Sarin Sthapit__</p>
 ##
 ### __Approach__
