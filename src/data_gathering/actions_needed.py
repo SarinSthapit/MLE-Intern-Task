@@ -20,7 +20,6 @@ t5_tokenizer = T5Tokenizer.from_pretrained('t5-small', legacy=False)
 sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
 def summarize_text_t5(text):
-    # Modify input to focus on actionable words
     input_text = "summarize: " + text
     inputs = t5_tokenizer.encode(input_text, return_tensors="pt", max_length=512, truncation=True)
 
@@ -60,9 +59,7 @@ def refine_summary(summary):
 
 
 def emphasize_actionable_phrases(summary):
-    # This function modifies the summary to add emphasis on actionable phrases
     actionable_words = ["demand", "need", "should", "must", "required", "call for"]
-    # Split the summary and insert actionable words if necessary
     modified_summary = summary
     for word in actionable_words:
         modified_summary = re.sub(r'\b(' + word + r')\b', word.upper(), modified_summary)
