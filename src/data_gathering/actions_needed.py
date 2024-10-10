@@ -1,6 +1,7 @@
 import warnings 
 import json
 import os
+import re
 from dotenv import load_dotenv
 import torch
 from transformers import T5ForConditionalGeneration, T5Tokenizer, pipeline
@@ -19,6 +20,7 @@ t5_tokenizer = T5Tokenizer.from_pretrained('t5-small', legacy=False)
 sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
 def summarize_text_t5(text):
+    # Modify input to focus on actionable words
     input_text = "summarize: " + text
     inputs = t5_tokenizer.encode(input_text, return_tensors="pt", max_length=512, truncation=True)
 
@@ -32,10 +34,13 @@ def summarize_text_t5(text):
     )
 
     summary = t5_tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+
+    summary = emphasize_actionable_phrases(summary)
     
     refined_summary = refine_summary(summary)
     
     return refined_summary.replace(":", "").strip()
+
 
 def refine_summary(summary):
     input_text = "refine: " + summary
@@ -52,6 +57,18 @@ def refine_summary(summary):
 
     refined_summary = t5_tokenizer.decode(refined_ids[0], skip_special_tokens=True)
     return refined_summary
+
+
+def emphasize_actionable_phrases(summary):
+    # This function modifies the summary to add emphasis on actionable phrases
+    actionable_words = ["demand", "need", "should", "must", "required", "call for"]
+    # Split the summary and insert actionable words if necessary
+    modified_summary = summary
+    for word in actionable_words:
+        modified_summary = re.sub(r'\b(' + word + r')\b', word.upper(), modified_summary)
+    
+    return modified_summary
+
 
 def load_discussions(json_path):
     

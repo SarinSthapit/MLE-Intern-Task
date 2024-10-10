@@ -18,6 +18,8 @@ t5_tokenizer = T5Tokenizer.from_pretrained('t5-small', legacy=False)
 
 sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
+import re
+
 def summarize_text_t5(text):
     input_text = "summarize: " + text
     inputs = t5_tokenizer.encode(input_text, return_tensors="pt", max_length=512, truncation=True)
@@ -33,9 +35,12 @@ def summarize_text_t5(text):
 
     summary = t5_tokenizer.decode(summary_ids[0], skip_special_tokens=True)
     
+    summary = re.sub(r'\b(I|we|my|mine|our|ours)\b', '', summary, flags=re.IGNORECASE)
+    
     refined_summary = refine_summary(summary)
     
     return refined_summary.replace(":", "").strip()
+
 
 def refine_summary(summary):
     input_text = "refine: " + summary

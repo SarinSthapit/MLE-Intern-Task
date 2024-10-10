@@ -6,6 +6,10 @@ body {
     padding: 0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .container {
     max-width: 800px;
     margin: 50px auto;
@@ -68,7 +72,7 @@ button:hover {
 
 h2 {
     color: #444;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 1.8em;
 }
 
@@ -76,6 +80,18 @@ h3 {
     color: #444;
     margin-bottom: 10px;
     font-size: 1.4em;
+}
+
+h5 {
+    color: #999;
+    margin-bottom: 2px;
+    font-size: 0.6em;
+}
+
+.inline-header {
+    display: inline-block;
+    margin-right: 10; 
+    vertical-align: middle; 
 }
 
 ul {

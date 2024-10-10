@@ -20,12 +20,13 @@
                 <option value="gnewsapi">GNews API</option>
             </select>
 
-            <button type="submit">Get Hot Topics & Analysis</button>
+            <button type="submit">Sentiment Analysis</button>
         </form>
 
         {% if hot_topics %}
         <div class="topics">
-            <h2>Hot Topics in {{ request.form.city }}</h2>
+            <h2 class="inline-header">Hot Topics in {{ request.form.city }}</h2>
+            <h5 class="inline-header">Click on Topic for Summaries</h5>
             <ul id="hot-topics-list">
                 {% for topic in hot_topics %}
                 <li>
@@ -41,7 +42,8 @@
         <br><br>
         {% if analysis_results %}
         <div class="analysis">
-            <h2>Actionable Insights</h2>
+            <h2 class="inline-header">Actionable Insights</h2>
+            <h5 class="inline-header">Click on Topic for Actionable Needs</h5>
             <ul id="actionable-insights-list">
                 {% for topic in hot_topics %}
                 <li>
@@ -56,7 +58,6 @@
         {% endif %}
         <br><br>
         {% if analysis_results %}
-
         <div class="sentiment-analysis">
             <h3>Sentiment Analysis</h3>
             <img src="{{ url_for('static', filename='sentiment_analysis.png') }}" alt="Sentiment Analysis Plot">
@@ -71,10 +72,19 @@
     </div>
 
     <script>
+        function capitalizeText(text) {
+            return text.split('. ').map(sentence => {
+                return sentence.charAt(0).toUpperCase() + sentence.slice(1);
+            }).join('. ');
+        }
+
         function toggleSummary(topic) {
             const summaryDiv = document.getElementById(topic + '-summary');
             if (summaryDiv.style.display === 'none' || summaryDiv.style.display === '') {
                 summaryDiv.style.display = 'block';
+                
+                const p = summaryDiv.querySelector('p');
+                p.innerText = capitalizeText(p.innerText);
             } else {
                 summaryDiv.style.display = 'none';
             }
@@ -84,6 +94,9 @@
             const actionDiv = document.getElementById(topic + '-action');
             if (actionDiv.style.display === 'none' || actionDiv.style.display === '') {
                 actionDiv.style.display = 'block';
+                
+                const p = actionDiv.querySelector('p');
+                p.innerText = capitalizeText(p.innerText);
             } else {
                 actionDiv.style.display = 'none';
             }
