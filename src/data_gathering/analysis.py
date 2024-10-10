@@ -89,8 +89,6 @@ def analyze_sentiment(discussions):
     return sentiments
 
 
-
-
 def overall_sentiment(sentiments):
     overall = {'positive': 0, 'negative': 0}
     
